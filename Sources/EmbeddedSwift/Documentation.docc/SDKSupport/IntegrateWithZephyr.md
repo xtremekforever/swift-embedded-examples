@@ -160,10 +160,13 @@ add_compile_options(
 
     # Disable PIE
     "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -fno-pie>"
+
+    # Add Libc include paths
+    "$<$<COMPILE_LANGUAGE:Swift>:SHELL:-Xcc -I -Xcc ${ZEPHYR_SDK_INSTALL_DIR}/arm-zephyr-eabi/picolibc/include>"
 )
 ```
 
-There are quite a few other Zephyr flags that must also be imported in order to get Zephyr include paths and flags such `-mcpu`, `mthumb`, `-mabi`, and so on:
+There are quite a few other Zephyr flags that can also be imported (optional) in order to get Zephyr include paths and flags such `-mcpu`, `mthumb`, `-mabi`, and so on:
 
 ```cmake
 # Import TOOLCHAIN_C_FLAGS from Zephyr as -Xcc flags
